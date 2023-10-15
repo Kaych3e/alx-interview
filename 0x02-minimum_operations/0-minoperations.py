@@ -5,7 +5,7 @@
 
 
 def minOperations(n):
-    """ 
+    """
         Calculates the fewest number of operations (copy, paste)
         needed to result in exactly n H characters
     """
