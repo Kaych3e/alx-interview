@@ -1,19 +1,21 @@
 #!/usr/bin/python3
 """Script that reads stdin line by line and computes metrics"""
+
 import sys
+
+"""initialise variables"""
+statc = [200, 301, 400, 401, 403, 404, 405, 500]
+count = 0
+stat_code_map = {}
+total_size = 0
 
 
 def print_stats():
     """prints statistics"""
     print("File size: {}".format(total_size))
-    for status, count in sorted(stat_code_map.items()):
-        print("{}: {}".format(status, count))
+    for status, number in sorted(stat_code_map.items()):
+        print("{}: {}".format(status, number))
 
-
-statc = [200, 301, 400, 401, 403, 404, 405, 500]
-count = 0
-stat_code_map = {}
-total_size = 0
 
 try:
     for line in sys.stdin:
