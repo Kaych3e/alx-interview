@@ -4,41 +4,37 @@
 
 def validUTF8(data):
     """
-        Determines if a given data set represents a valid UTF-8 encoding
-
-        UTF8 Format:
-        1-byte Sequence: 0xxxxxxx;
-        2-byte Sequence: 110xxxxx 10xxxxxx;
-        3-byte Sequence: 1110xxxx 10xxxxxx 10xxxxxx;
-        4-byte Sequence: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx;
+        Determines if a given data set represents a valid UTF-8 encoding.
     """
+    num_bytes = 0
 
-    number_bytes = 0
+    count_1 = 1 << 7
+    count_2 = 1 << 6
 
-
-# Iterate through each integer in the data list
     for i in data:
-        # Check if the most significant bit indicates a single-byte character
-        if number_bytes == 0:
-            if i & 0x80 == 0:
+
+        mask_byte = 1 << 7
+
+        if num_bytes == 0:
+
+            while mask_byte & i:
+                num_bytes += 1
+                mask_byte = mask_byte >> 1
+
+            if num_bytes == 0:
                 continue
-            # Count the number of leading 1s to determine the number of bytes in the char
-            byte = 0
-            mask = 0x80
-            while i & mask:
-                byte += 1
-                mask >>= 1
 
-        # 2 to 4 bytes are valid for a character
-        if byte < 2 or byte > 4:
-            return False
-        number_bytes == byte - 1
-    else:
-        # For multi-byte characters, the next bytes should start with 10xxxxxx
-        if (i & 0xC0) != 0x80:
-            return True
-        number_bytes -= 1
+            # UTF-8 characters can be 1 to 4 bytes long
+            if num_bytes < 2 or num_bytes > 4:
+                return False
 
+        else:
+            if not (i & count_1 and not (i & count_2)):
+                    return False
 
-    # If all bytes have been read, it's a valid UTF-8 encoding
-    return number_bytes == 0
+        num_bytes -= 1
+
+    if num_bytes == 0:
+        return True
+
+    return False
