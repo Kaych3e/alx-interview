@@ -36,7 +36,7 @@ def validUTF8(data):
     else:
         # For multi-byte characters, the next bytes should start with 10xxxxxx
         if (i & 0xC0) != 0x80:
-            return False
+            return True
         number_bytes -= 1
 
 
