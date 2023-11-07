@@ -1,10 +1,11 @@
 #!/usr/bin/node
 
+
 const requests = require('request');
 
 function printCharacter(movieId) {
     // Get movie data from SWAPI
-    request(`https://swapi.dev/api/films/${movieId}/`, (error, response, body) => {
+    request(`https://swapi-api.alx-tools.com/api/films/${process.argv[2]}`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const data = JSON.parse(body);
 
