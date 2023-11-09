@@ -1,4 +1,5 @@
 #!/usr/bin/node
+/* Script to fetch data from starwars API */
 
 
 const request = require('request');
