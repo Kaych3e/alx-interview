@@ -37,5 +37,4 @@ function fetchAndPrintCharNames(movieUrls) {
   });
 }
 
-// Print the character names
 fetchAndPrintCharNames(movieUrl);
