@@ -12,6 +12,7 @@ def primeNumbers(n):
                 shuffled[i] = False
     return primes
 
+
 def isWinner(x, nums):
     """
     Module to determine the winner of the game
